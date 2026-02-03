@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Valentine's Message</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Nunito:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+
+p{
+	text-indent: 50px;
+    color: #555;
+    font-family: 'Nunito', sans-serif;
+    font-size: 1rem;
+    line-height: 1.6;
+    text-shadow: 0 1px 1px rgba(255, 255, 255, 0.8);
+}
+
+h1 {
+	font-weight: 200;
+    font-family: 'Dancing Script', cursive;
+    font-size: 3rem;
+    color: #d32f2f;
+    margin-top: 0;
+    text-shadow: 0 1px 1px rgba(255, 255, 255, 0.8);
+}
+
+body {
+	margin: 0px;
+}
+
+.container {
+	position: relative;
+	width: 100%;
+	height: 100vh;
+	overflow: hidden;
+	background-color: #fce4ec;
+	transition: background-color 2s;
+}
+
+.heart {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	text-align: center;
+	transform: translate(-50%, -50%);
+	transition: transform 2s;
+	z-index: 1;
+}
+
+.heart > img {
+	width: 50px;
+	height: auto;
+}
+
+.message {
+	padding: 20px;
+
+	background-color: #fdfbf7;
+	background-image: url("https://www.transparenttextures.com/patterns/natural-paper.png");
+	min-width: 400px;
+	height: 75%;
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+	z-index: 0;
+	overflow: hidden;
+	animation-name: openmsg;
+	animation-duration: 2s;
+	animation-timing-function: linear;
+	animation-play-state: paused;
+	animation-fill-mode: forwards;
+	box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+	border-radius: 5px;
+}
+
+.heart > img:hover {
+	animation-name: beat;
+	animation-duration: 2s;
+	animation-timing-function: ease-in-out;
+	animation-iteration-count: infinite;
+	animation-play-state: running;
+}
+
+
+
+@keyframes beat {
+	0% {
+		width: 50px;
+	}
+	25% {
+		width: 58px;
+	}
+	30% {
+		width: 50px;
+	}
+	50% {
+		width: 45px;
+	}
+	60% {
+		width: 50px;
+	}
+	75% {
+		width: 58px;
+	}
+	100% {
+		width: 50px;
+	}
+}
+
+@keyframes openmsg {
+	0% {
+		height: 0px;
+		padding: 0px 20px;
+	}
+	100% {
+		height: 75%;
+		padding: 20px 20px;
+	}
+}
+
+@keyframes heartMove {
+	0% {
+		top: 50%
+	}
+	100% {
+		top: 85%;
+		transform: translate(-50%, 0);
+	}
+}
+
+.openNor {
+	animation-direction: normal;
+	animation-play-state: running;
+}
+
+.closeNor {
+	animation-direction: reverse;
+	animation-play-state: running;
+}
+
+.no-anim {
+	animation: none;
+}
+
+.closed {
+	height: 0px;
+	padding: 0px 20px;
+}
+
+.bottom {
+	bottom: 5px;
+}
+
+.openHer {
+	animation-name: heartMove;
+	animation-duration: 2s;
+	animation-timing-function: linear;
+	animation-play-state: running;
+	animation-fill-mode: forwards;
+}
+
+.closeHer {
+	animation-name: heartMove;
+	animation-duration: 2s;
+	animation-timing-function: linear;
+	animation-play-state: running;
+	animation-direction: reverse;
+	animation-fill-mode: forwards;
+}
+
+.beating > img {
+	animation-name: beat;
+	animation-duration: 2s;
+	animation-timing-function: ease-in-out;
+	animation-iteration-count: infinite;
+	animation-play-state: running;
+}
+
+.openedHer {
+	top: 85%;
+	transform: translate(-50%, 0);
+}
+
+.instruction {
+	position: absolute;
+	top: 60%;
+	left: 50%;
+	transform: translateX(-50%);
+	font-family: 'Nunito', sans-serif;
+	color: #555;
+	font-size: 1.2rem;
+	transition: opacity 0.5s;
+}
+
+.btn-rose {
+	display: inline-block;
+	margin-top: 20px;
+	padding: 12px 30px;
+	background: linear-gradient(135deg, #ff4d6d, #ff8fa3);
+	color: white;
+	text-decoration: none;
+	border-radius: 50px;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 600;
+    box-shadow: 0 4px 15px rgba(255, 77, 109, 0.4);
+    transition: all 0.3s ease;
+}
+
+.btn-rose:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(255, 77, 109, 0.6);
+}
+
+.bg-heart {
+    position: absolute;
+    top: -10vh;
+    color: #ff4d6d;
+    animation: fall linear forwards;
+    z-index: 10;
+    pointer-events: none;
+}
+
+@keyframes fall {
+    to {
+        transform: translateY(110vh) rotate(360deg);
+    }
+}
+
+.rose-decoration {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    width: 100px;
+    opacity: 0;
+    transition: opacity 2s;
+}
+
+.bg-item {
+    position: absolute;
+    top: 50%;
+    right: 0;
+    transform: translateY(-50%);
+    height: 80vh;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 2s;
+}
+
+.bg-cat {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 45vh;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 2s;
+}
+    </style>
+</head>
+<body>
+<div class="container">
+	<img src="bgitem.png" class="bg-item" alt="Background">
+	<img src="cat.png" class="bg-cat" alt="Cat">
+	<label>
+	<div class="heart">
+		<img src="https://upload.wikimedia.org/wikipedia/commons/4/42/Love_Heart_SVG.svg"></img>
+	</div>
+	<input id="messageState" type="checkbox" style="display:none"/>
+	</label>
+	<div class="instruction">Click the heart!</div>
+	<div class="message closed">
+		<h1>Hi, my love</h1>
+		<p>You’re my favorite kind of magic — the kind that doesn’t need a spell, just a smile. Every time you laugh, it feels like the whole world gets a little brighter, like clouds politely move away to let the sunshine through just for you. You have this adorable way of turning ordinary moments into memories I never want to forget.
+
+You’re cute in the way you focus on little things, cute in the way you get excited about simple joys, and cute in the way you care so deeply without even trying. It’s not just how you look (though yes, you’re absolutely stunning 😌), it’s how you make people feel safe, happy, and understood just by being you.
+If cuteness had a definition, it would probably just be your name written in bold letters. You’re not trying to be adorable, you just naturally are. And I hope you never change that, because this version of you is already perfect in the most beautiful way.
+
+You’re my cutie — today, tomorrow, and always 💕</p>
+		<a href="rose.html" class="btn-rose">Something for u</a>
+		<img src="roses.png" class="rose-decoration" alt="Roses">
+	</div>
+</div>
+<script>
+let heartInterval;
+
+function createHeart() {
+    const heart = document.createElement('div');
+    const colors = ["#ff4d6d", "#ff8fa3", "#ffb3c1", "#ffccd5", "#fff0f3", "#d32f2f"];
+    heart.classList.add('bg-heart');
+    heart.innerHTML = '❤';
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.color = colors[Math.floor(Math.random() * colors.length)];
+    heart.style.fontSize = Math.random() * 20 + 10 + "px";
+    heart.style.animationDuration = Math.random() * 3 + 2 + "s";
+    document.querySelector('.container').appendChild(heart);
+    setTimeout(() => heart.remove(), 5000);
+}
+
+$("#messageState").on("change", (x) => {
+	$(".message").removeClass("openNor").removeClass("closeNor");
+	if ($("#messageState").is(":checked")) {
+		$(".message").removeClass("closed").removeClass("no-anim").addClass("openNor");
+		$(".heart").removeClass("closeHer").removeClass("openedHer").addClass("openHer");
+		$(".container").css("background-color", "#f48fb1");
+		$(".instruction").css("opacity", "0");
+		$(".bg-item").css("opacity", "0.15");
+		$(".bg-cat").css("opacity", "1");
+		$(".rose-decoration").css("opacity", "1");
+		console.log("Abrindo");
+		heartInterval = setInterval(createHeart, 300);
+	} else {
+		$(".message").removeClass("no-anim").addClass("closeNor");
+		$(".heart").removeClass("openHer").removeClass("openedHer").addClass("closeHer");
+		$(".container").css("background-color", "#fce4ec");
+		$(".instruction").css("opacity", "1");
+		$(".bg-item").css("opacity", "0");
+		$(".bg-cat").css("opacity", "0");
+		$(".rose-decoration").css("opacity", "0");
+		console.log("fechando");
+		clearInterval(heartInterval);
+	}
+});
+
+$(".message").on('webkitAnimationEnd oanimationend msAnimationEnd animationend', function(e) {
+	console.log("Animation End");
+	if ($(".message").hasClass("closeNor"))
+		$(".message").addClass("closed");
+	$(".message").removeClass("openNor").removeClass("closeNor").addClass("no-anim");
+});
+
+$(".heart").on('webkitAnimationEnd oanimationend msAnimationEnd animationend', function(e) {
+	console.log("Animation End");
+	if (!$(".heart").hasClass("closeHer"))
+		$(".heart").addClass("openedHer").addClass("beating");
+	else
+		$(".heart").addClass("no-anim").removeClass("beating");
+	$(".heart").removeClass("openHer").removeClass("closeHer");
+});</script>
+</body>
+</html>
